@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <script type="application/javascript" src="../../js/validationGuestForm.js"></script>
+    <script type="application/javascript" src="../../js/validationCommon.js"></script>
+        <script type="application/javascript" src="../../js/showDetails.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hotel "TIN2021"</title>
+</head>
+
+<body>
+<div id="all" >
+
+<div id="header" >
+<H1 id="title">Hotel "TIN2021"</H1>
+<img  src="../../images/logo.png"  class="logo" alt="logo">
+</div>
+
+<div id="menu" >
+<a href="../"><div id="link" style="margin-left: 50px; ">Strona Główna</div></a>
+<a href="/guests/"><div id="link1" style="background-color:#5c8ebe;">Gość</div></a>
+<a href="/rooms/"><div id="link2" >Pokój</div></a>
+<a href="/reservation/"><div id="link3" >Rezerwacja</div></a>
+</div>
+<div id="wrapper">
+<br>
+<h1>Szczególy goscia</h1><hr>
+<br><br>
+<form class="form" id="theForm"action="<%=formAction%>"  method="post"  novalidate  >
+<div class="group">
+<input type="hidden" name="_id" value="<%= guest._id %>">
+<label >Imię:<abbr title="required" >*</abbr></label>
+<input type="text" name="firstName" id="firstName" placeholder="2-60 znaków" value="<%= guest.firstName %>" class="<%= validationErrors.find(e => e.path.includes('firstName')) ? 'error-input' : '' %>"
+  <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+  <span id="errorFirstName" class="errors-text">
+    <% if (validationErrors.find(e => e.path.includes('firstName'))) { %>
+        <%= validationErrors.find(e => e.path.includes('firstName')).message %>
+    <% } %>
+</span>
+
+<label >Nazwisko:<abbr title="required">*</abbr></label>
+<input type="text" name="lastName" id="lastName" placeholder="2-60 znaków" class="<%= validationErrors.find(e => e.path.includes('lastName')) ? 'error-input' : '' %>" value="<%= guest.lastName %>"
+  <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+  <span id="errorLastName" class="errors-text"><% if (validationErrors.find(e => e.path.includes('lastName'))) { %>
+        <%= validationErrors.find(e => e.path.includes('lastName')).message %>
+    <% } %></span>
+<label >PESEL:<abbr title="required" >*</abbr></label>
+<input type="text" name="pesel" id="pesel" placeholder="2-20 znaków" class="<%= validationErrors.find(e => e.path.includes('pesel')) ? 'error-input' : '' %>" value="<%= guest.pesel %>"
+  <%= (formMode == 'showDetails') ? 'disabled' : '' %>/>
+  <span id="errorPesel" class="errors-text" >
+    <% if (validationErrors.find(e => e.path.includes('pesel'))) { %>
+        <%= validationErrors.find(e => e.path.includes('pesel')).message %>
+    <% } %>
+</span>
+<label >Data urodzenia:<abbr title="required" >*</abbr></label>
+
+<input type="date" name="dateOfBirth" id="dateOfBirth" class="<%= validationErrors.find(e => e.path.includes('dateOfBirth')) ? 'error-input' : '' %>" 
+
+<% if (formMode != 'showDetails') { %>      
+                value="<%= guest.dateOfBirth %>" 
+            <% } else { %>
+                value='<%= guest.dateOfBirth.toISOString().split('T')[0] %>'  
+            <% } %> 
+  <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+
+  <span id="errorDateOfBirth" class="errors-text">
+    <% if (validationErrors.find(e => e.path.includes('dateOfBirth'))) { %>
+        <%= validationErrors.find(e => e.path.includes('dateOfBirth')).message %>
+    <% } %>
+</span>
+
+<div class="buttons">
+<p id="errorsSummary" class="errors-text"></p>  
+<% if (formMode == 'showDetails') { %>
+<a href="/guests/edit/<%= guest._id %>" class="button-edit" style="padding:7px;">Edytuj</a><% } else {%>
+
+<input class="button-submit" type="submit" value="Zmień"  />
+<% } %>
+</div>
+</div>
+</form>
+
+<% if (formMode == 'showDetails' || formMode == 'edit') { %>
+
+<h1>Szczególy rezerwacji</h1><hr>
+<table class="table-list">
+<thead>
+    <tr>
+        <th style=" width: 20%;">Numer Pokoju</th>
+        <th style=" width: 20%;">Typ</th>
+        <th>Cena(zł)</th>
+		<th style=" width: 10%;">Ilość miejsc</th>
+        <th>Data od</th>
+		<th>Data do</th>
+    </tr>
+</thead>
+<tbody>
+    <% for (let g of guest.reservations) { %>
+    <tr>
+        <td><a href="/rooms/details/<%= g.room._id %>"><%= g.room.roomNumber %></td>
+        <td><%= g.room.type %></td>
+        <td><%= g.room.price %></td>
+		<td><%= g.room.numberOfPlaces %></td>
+        <td><%= g.dateFrom.toISOString().split('T')[0] %></td>
+        <td><%= g.dateTo ? g.dateTo.toISOString().split('T')[0] : '' %></td>
+    </tr>
+	    <% } %>
+
+</tbody></table><% } %>
+<p id="errorsSummary" class="errors-text"></p>
+<% if (formMode != 'showDetails') { %>
+
+<a class="button-cancel" href="/guests">Anuluj</a>
+    <% } else { %>
+<a href="/guests" class="button-cancel">Powrót</a>
+<% } %>
+</div><br>
+
+<%- include('../fragments/footer.ejs') %>

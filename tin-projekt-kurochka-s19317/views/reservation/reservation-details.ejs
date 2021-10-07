@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <script type="application/javascript" src="../../js/validationReservationForm.js"></script>
+    <script type="application/javascript" src="../../js/validationCommon.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hotel "TIN2021"</title>
+</head>
+
+<body>
+<div id="all" >
+
+<div id="header" >
+<H1 id="title">Hotel "TIN2021"</H1>
+<img  src="../../images/logo.png"  class="logo" alt="logo">
+</div>
+<div id="menu" >
+<a href="../"><div id="link" style="margin-left: 50px; ">Strona Główna</div></a>
+<a href="/guests/"><div id="link1" >Gość</div></a>
+<a href="/rooms/"><div id="link2" >Pokój</div></a>
+<a href="/reservation/"><div id="link3" style="background-color:#5c8ebe;">Rezerwacja</div></a>
+</div>
+<div id="wrapper">
+<br>
+<h1>Szczególy rezerwacji</h1><hr>
+<form class="form" action="<%=formAction%>"  novalidate method="post">
+<input type="hidden" name="_id" value="<%= reservation._id %>">
+<div class="group">
+<label >Gosć:<abbr title="required" aria-label="required">*</abbr></label>
+<select id="guestId" name="guestId" class="<%= validationErrors.find(e => e.path.includes('guestId')) ? 'error-input' : '' %>"  <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+
+    <% for (let i=0; i<allGuests.length; i++) { let guest = allGuests[i]; %>
+        <option value="<%= guest._id %>" label="<%= guest.firstName + ' ' + guest.lastName %>"
+            <%= (reservation._id && guest._id.toString() === reservation.guest._id.toString()) ? 'selected' : ''%>></option>
+    <% } %>
+</select>
+<span id="errorGuest" class="errors-text"><% if (validationErrors.find(e => e.path.includes('guestId'))) { %>
+        <%= validationErrors.find(e => e.path.includes('guestId')).message %>
+    <% } %></span>
+<label>Pokój:<abbr title="required" aria-label="required">*</abbr></label>
+<select id="roomId" name="roomId" class="<%= validationErrors.find(e => e.path.includes('roomId')) ? 'error-input' : '' %>"  <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+    <% for (let i=0; i<allRooms.length; i++) { let room = allRooms[i]; %>
+        <option value="<%= room._id %>" label="<%= room.roomNumber %>"
+            <%= (reservation._id && room._id.toString() === reservation.room._id.toString()) ? 'selected' : ''%>></option>
+    <% } %>
+</select>
+<span id="errorRoom" class="errors-text"><% if (validationErrors.find(e => e.path.includes('roomId'))) { %>
+        <%= validationErrors.find(e => e.path.includes('roomId')).message %>
+    <% } %> </span>
+<label >Data od:<abbr title="required">*</abbr></label>
+<input type="date" id="dateFrom" name="dateFrom" class="<%= validationErrors.find(e => e.path.includes('dateFrom')) ? 'error-input' : '' %>" 
+<% if (formMode != 'showDetails') { %>      
+                value="<%= reservation.dateFrom %>" 
+            <% } else { %>
+                value='<%= reservation.dateFrom.toISOString().split('T')[0] %>'  
+            <% } %> 
+<%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+<span id="errorDateFrom" class="errors-text"><% if (validationErrors.find(e => e.path.includes('dateFrom'))) { %>
+        <%= validationErrors.find(e => e.path.includes('dateFrom')).message %>
+    <% } %></span>
+<label >Data do:<abbr title="required" >*</abbr></label>
+<input type="date" id="dateTo" class="<%= validationErrors.find(e => e.path.includes('dateTo')) ? 'error-input' : '' %>" name="dateTo" 
+<% if (formMode != 'showDetails') { %>      
+                value="<%= reservation.dateTo %>" 
+            <% } else { %>
+                value='<%= reservation.dateTo.toISOString().split('T')[0] %>'  
+            <% } %> 
+<%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+<span id="errorDateTo" class="errors-text"><% if (validationErrors.find(e => e.path.includes('dateTo'))) { %>
+        <%= validationErrors.find(e => e.path.includes('dateTo')).message %>
+    <% } %> </span>
+</div>
+<p id="errorsSummary" class="errors-text"></p>
+<% if (formMode == 'showDetails') { %>
+<div class="buttons"><a href="/reservation/edit/<%= reservation._id %>" class="button-edit" style="padding:7px;">Edytuj</a></div><br>
+<% }else {%>
+<input class="button-submit" type="submit" value="<%=btnLabel%>" />
+<% } %>
+</form>
+<div class="buttons">
+
+<p id="errorsSummary" class="errors-text"></p>
+<% if (formMode != 'showDetails') { %>
+<a class="button-cancel" href="/reservation">Anuluj</a>
+    <% } else { %>
+<a href="/reservation" class="button-cancel">Powrót</a>
+<% } %>
+</div><br>
+<br>
+</div>
+<br>
+<%- include('../fragments/footer.ejs') %>

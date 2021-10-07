@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const guestsController = require('../controllers/guestsController');
+router.get('/', guestsController.showGuestList);
+router.get('/add', guestsController.showAddGuestForm);
+router.get('/edit/:guest_id', guestsController.showEditGuestForm);
+router.get('/details/:guest_id', guestsController.showGuestDetails);
+router.post('/add', guestsController.addGuest); 
+router.post('/edit', guestsController.updateGuest);
+router.get('/delete/:guest_id', guestsController.deleteGuest);
+module.exports = router;

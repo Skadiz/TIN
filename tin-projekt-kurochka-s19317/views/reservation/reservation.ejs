@@ -1,0 +1,42 @@
+﻿<%- include('../fragments/header.ejs') %>
+<div id="menu" >
+<a href="../"><div id="link" style="margin-left: 50px; ">Strona Główna</div></a>
+<a href="/guests"><div id="link1" >Gość</div></a>
+<a href="/rooms/"><div id="link2" >Pokój</div></a>
+<a href=""><div id="link3" style="background-color:#5c8ebe;">Rezerwacja</div></a>
+</div>
+<div id="wrapper">
+<br>
+<h1>Lista Rezerwacje</h1><hr>
+<table class="table-list">
+<thead>
+    <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Numer Pokoju</th>
+		<th >Akcje</th>
+    </tr>
+</thead>
+<tbody>
+<% for (let reservation of reservations) { %>
+    <tr>
+        <td><%= reservation.guest.firstName %></td>
+        <td><%= reservation.guest.lastName %></td>
+        <td><%= reservation.room.roomNumber %></td>
+		<td class="buttons">
+                   <a href="/reservation/details/<%= reservation._id %>" class="button-details">Szczegóły</a>
+
+                   <a href="/reservation/edit/<%= reservation._id %>" class="button-edit">Edytuj</a>
+
+                    <a href="/reservation/delete/<%= reservation._id %>" class="button-delete">Usuń</a>
+
+        </td>
+    </tr>
+    <% } %>
+</tbody></table>
+<p><a href="/reservation/add" class="button-add">Dodaj nową rezerwawcje</a></p>
+
+
+
+</div>
+<%- include('../fragments/footer.ejs') %>

@@ -1,0 +1,313 @@
+﻿
+body {
+text-align: justify;
+font-family: verdana;
+font-size: 13pt;
+background-image:url(../images/bg.jpg);	
+background-size: cover;
+background-attachment: fixed;
+color: #FFFFFF;
+min-width: 360px;
+}
+#all{
+    margin-left: calc(50% - 450px);
+}
+
+#header {
+width: 900px;
+height: 250px;
+background-color:rgba(0, 102, 190, 0.5);
+border-radius:10px;
+
+}
+
+#wrapper{
+width:900px;
+background-color:rgba(0, 102, 190, 0.5);
+border-radius:10px;
+text-align:justify;
+
+
+}
+
+#menu{
+width: 900px;
+height: 50px;
+background-color: #0000a8;
+margin-top: 10px;
+margin-bottom: 10px;
+border-radius: 10px;
+
+
+}
+#title{
+	font-size: 27pt;
+	float:left;
+	padding: 42px 2px 2px 32px;
+	 display:flex;
+
+}
+
+#link,#link1,#link2,#link3
+{
+background-color:#0066C6;
+float:left;
+width:200px;
+height:40px;
+padding-top: 10px;
+text-align:center;
+font-size:14pt;
+color:#FFFFFF;
+}
+
+#link:hover,
+#link1:hover,
+#link2:hover,
+#link3:hover
+{
+background-color:#5c8ebe;
+float:left;
+width:200px;
+height:40px;
+text-align:center;
+font-size:14pt;
+color:#C1C1C1;
+
+}
+h1{
+    text-align: center;
+}
+hr{
+color:white;
+}
+
+a
+{text-decoration:none;
+color:#FFFFFF;
+}
+
+a:hover
+{
+color:#C1C1C1;
+
+}
+p
+{
+text-align:justify;
+margin-left:20px;
+margin-right:20px;
+padding-bottom:20px;
+}
+p.buttons{
+	text-align:center;
+margin-left:20px;
+margin-right:20px;
+padding-bottom:0px;
+}
+
+
+.logo{
+width:275px;
+height:175px;
+margin:20px;
+float:right;	
+}
+
+form
+{
+margin-left:20px;
+text-align:left;
+font-family:verdana,"sans serif";
+font-size:13pt;
+}
+#marquee
+{width:900px;
+box-shadow:0 0 50px #000000;
+background-color:rgba(0, 102, 190, 0.5);
+border-radius:10px;
+text-align:center;
+}
+input {
+	font-weight: bold;
+}
+
+li{
+	list-style-type: none;
+}
+.button-details,
+.button-edit,
+.button-delete,
+.button-add,
+.button-submit,
+.button-cancel {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.8rem;
+	padding: 5px;
+	margin: 0px;
+}
+.button-add,
+.button-submit,
+.button-cancel {
+    padding: 0.5rem 1rem;
+	
+
+}
+.button-add,
+.button-submit{
+	background-color: #27ae60;
+}
+
+.button-add,
+.button-submit:hover {
+    background-color: #2ecc71;
+
+}
+.button-details {
+    background-color: #2980b9;    
+}
+.button-details:hover {
+    background-color: #3498db;
+}
+.button-edit {
+    background-color: #f39c12;
+}
+
+.button-edit:hover {
+    background-color: #f1c40f;
+}
+.button-delete,
+.button-cancel {
+    background-color: #c0392b;
+}
+
+.button-delete,
+.button-cancel :hover {
+    background-color: #e74c3c;
+}
+.button-submit,
+.button-cancel {
+    width: 100%;
+}
+.button-cancel {
+    box-sizing: border-box;
+    display: block;
+}
+
+.button-submit {
+    margin-bottom: 0.5rem;
+}
+.buttons{
+    margin-top: 1rem;
+}
+
+.group {
+    margin-bottom: 1rem;
+}
+.form label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+.form select, 
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="date"],
+.form input[type="email"] {
+    border: 1px solid #7f8c8d;
+    color:#2c3e50;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100%;
+}
+.form {
+    margin-left: 2rem;
+    width: 300px;
+}
+button, 
+input, 
+select, 
+textarea { 
+    font-family: inherit; 
+    font-size: 100%; 
+    box-sizing: border-box; 
+    padding: 0; margin: 0; 
+} 
+
+textarea { 
+    overflow: auto; 
+}
+.table-list {
+    border-collapse: collapse;
+    width: 100%;
+	text-align:center
+}
+.table-list,
+.table-list th,
+.table-list td {
+    border: 1px solid #bdc3c7;
+}
+.table-list th,
+.table-list td {
+    padding: 0.5rem;
+}
+.table-list thead{
+	font-size: 16pt;
+}
+.errors-text {
+  font-size: 0.85em;
+  line-height: 2.25rem;
+  color:#ff0000;
+}
+.form input.error-input,
+.form select.error-input {
+  border: 3px solid #e74c3c
+}
+@media all and (max-width: 720px) {
+  header {
+    flex-direction: column;
+    }
+    header h1 {
+    text-align: center;
+    }
+    header img {
+    align-self: center;
+    }
+    nav ul {
+        flex-wrap: wrap;
+    }
+
+    nav ul li {
+        flex-basis: 50%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block;
+    }
+    .form {
+        grid-template-columns: 1fr;
+        row-gap:unset;
+        margin-left: unset;
+    }
+
+    .form .errors-text {
+    margin-bottom: 1rem;
+}
+}
+
+@media all and (max-width: 400px) {
+  body, 
+    nav, 
+    nav ul, 
+    header, 
+    main, 
+    footer {
+        margin: 0;
+    }
+    nav ul li {
+    flex-basis: 100%;
+}
+}

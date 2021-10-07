@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../../css/style.css">
+	<script type="application/javascript" src="../../js/validationGuestForm.js"></script>
+	<script type="application/javascript" src="../../js/validationCommon.js"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Hotel "TIN2021"</title>
+</head>
+
+<body>
+<div id="all" >
+
+<div id="header" >
+<H1 id="title">Hotel "TIN2021"</H1>
+<img  src="../../images/logo.png"  class="logo" alt="logo">
+</div>
+
+<div id="menu" >
+<a href="../"><div id="link" style="margin-left: 50px; ">Strona Główna</div></a>
+<a href="/guests/"><div id="link1" style="background-color:#5c8ebe;">Gość</div></a>
+<a href="/rooms/"><div id="link2" >Pokój</div></a>
+<a href="/reservation/"><div id="link3" >Rezerwacja</div></a>
+</div>
+<div id="wrapper">
+ <script type="application/javascript" src="../../js/validationGuestForm.js"></script>
+<br>
+<h1>Nowy Gość</h1><hr>
+<br><br>
+<!-- onsubmit="return validateForm();" - dla walidacji po stronie klienta, domyślnie - po stronie serwera --> 
+
+<form class="form" method="post" action="<%=formAction%>"  onsubmit="return validateForm();" novalidate >
+<div class="group" >
+<label >Imię:<abbr title="required" aria-label="required">*</abbr></label>
+<input type="text" name="firstName" id="firstName" placeholder="2-60 znaków" 
+class="<%= validationErrors.find(e => e.path.includes('firstName')) ? 'error-input' : '' %>"
+value="<%= guest.firstName %>" 
+>
+<span id="errorFirstName" class="errors-text">
+    <% if (validationErrors.find(e => e.path.includes('firstName'))) { %>
+        <%= validationErrors.find(e => e.path.includes('firstName')).message %>
+    <% } %>
+</span>
+<label >Nazwisko:<abbr title="required" aria-label="required" >*</abbr></label>
+<input type="text" name="lastName" id="lastName" placeholder="2-60 znaków" class="<%= validationErrors.find(e => e.path.includes('lastName')) ? 'error-input' : '' %>" value="<%= guest.lastName %>">
+<span id="errorLastName" class="errors-text"><% if (validationErrors.find(e => e.path.includes('lastName'))) { %>
+        <%= validationErrors.find(e => e.path.includes('lastName')).message %>
+    <% } %></span>
+<label >PESEL:<abbr title="required" aria-label="required">*</abbr></label>
+<input type="text" name="pesel" id="pesel" placeholder="2-20 znaków" class="<%= validationErrors.find(e => e.path.includes('pesel')) ? 'error-input' : '' %>" value="<%= guest.pesel %>">
+<span id="errorPesel" class="errors-text" >
+	<% if (validationErrors.find(e => e.path.includes('pesel'))) { %>
+        <%= validationErrors.find(e => e.path.includes('pesel')).message %>
+    <% } %>
+</span>
+<label >Data urodzenia:<abbr title="required" aria-label="required">*</abbr></label>
+ <fmt:setTimeZone value = "GMT-8" />
+<input type="date" name="dateOfBirth" id="dateOfBirth" class="<%= validationErrors.find(e => e.path.includes('dateOfBirth')) ? 'error-input' : '' %>" value='<%= guest.dateOfBirth %>' placeholder="yyyy-mm-dd">
+<span id="errorDateOfBirth" class="errors-text">
+	<% if (validationErrors.find(e => e.path.includes('dateOfBirth'))) { %>
+        <%= validationErrors.find(e => e.path.includes('dateOfBirth')).message %>
+    <% } %>
+</span>
+
+<div class="buttons">
+<p id="errorsSummary" class="errors-text"></p>	
+<input value="Dodaj" class="button-submit" type="submit" >
+    <a href="/guests/" class="button-cancel">Anuluj</a>    
+<br>
+</div>
+</form>
+<br>
+
+</div><br>
+
+<%- include('../fragments/footer.ejs') %>

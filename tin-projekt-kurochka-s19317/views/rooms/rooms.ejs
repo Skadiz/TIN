@@ -1,0 +1,42 @@
+﻿<%- include('../fragments/header.ejs') %>
+<div id="menu" >
+<a href="../"><div id="link" style="margin-left: 50px; ">Strona Główna</div></a>
+<a href="/guests/"><div id="link1" >Gość</div></a>
+<a href=""><div id="link2" style="background-color:#5c8ebe;">Pokój</div></a>
+<a href="/reservation/"><div id="link3" >Rezerwacja</div></a>
+</div>
+<div id="wrapper">
+<br>
+<h1>Lista Pokoi	</h1><hr>
+<table class="table-list">
+<thead>
+    <tr>
+        <th>Numer</th>
+        <th>Typ</th>
+        <th>Cena (zł)</th>
+        <th>Ilość miejsc</th>
+		<th >Akcje</th>
+    </tr>
+</thead>
+<tbody>
+<% for (let room of rooms) { %>
+    <tr>
+        <td><%= room.roomNumber %></td>
+        <td><%= room.type %></td>
+        <td><%= room.price %></td>
+        <td><%= room.numberOfPlaces %></td>
+        <td class="buttons">
+                    <a href="/rooms/details/<%= room._id %>" class="button-details">Szczegóły</a>
+
+                    <a href="/rooms/edit/<%= room._id %>"  class="button-edit">Edytuj</a>
+
+                    <a href="/rooms/delete/<%= room._id %>" class="button-delete">Usuń</a>
+    </tr>
+    <% } %>
+</tbody></table>
+<p><a href="/rooms/add" class="button-add">Dodaj nowy pokój</a></p>
+
+
+
+</div>
+<%- include('../fragments/footer.ejs') %>

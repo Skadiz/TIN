@@ -1,0 +1,44 @@
+﻿<%- include('../fragments/header.ejs') %>
+<div id="menu" >
+<a href="../"><div id="link" style="margin-left: 50px; ">Strona Główna</div></a>
+<a href=""><div id="link1" style="background-color:#5c8ebe;">Gość</div></a>
+<a href="/rooms/"><div id="link2" >Pokój</div></a>
+<a href="/reservation/"><div id="link3" >Rezerwacja</div></a>
+</div>
+<div id="wrapper">
+<br>
+<h1>Lista Gości	</h1><hr>
+<table class="table-list">
+<thead>
+    <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>PESEL</th>
+        <th>DateOfBirth</th>
+		<th >Akcje</th>
+    </tr>
+</thead>
+<tbody>
+<% for (let guest of guests) { %>
+    <tr>
+        <td><%= guest.firstName %></td>
+        <td><%= guest.lastName %></td>
+        <td><%= guest.pesel %></td>
+        <td><%= guest.dateOfBirth.toISOString().split('T')[0] %></td>
+		<td class="buttons">
+                    <a href="/guests/details/<%=guest._id%>" class="button-details">Szczegóły</a>
+
+                    <a href="/guests/edit/<%=guest._id%>"  class="button-edit">Edytuj</a>
+
+                    <a href="/guests/delete/<%=guest._id%>" class="button-delete">Usuń</a>
+        </td>
+    </tr>
+	<% } %>
+    
+</tbody></table>
+<p><a href="/guests/add" class="button-add">Dodaj nowego goscia</a></p>
+
+
+
+</div>
+<%- include('../fragments/footer.ejs') %>
